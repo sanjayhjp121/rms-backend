@@ -11,6 +11,9 @@ const config = require('../configs/config');
 const { path } = require("../routes/userRoute");
 
 
+require('dotenv').config();
+
+const frontUrl = process.env.REACT_URL;
 
 const createToken = async(id)=>{
   const token =  jwt.sign(
@@ -51,7 +54,7 @@ const verifyLogin = async(req, res)=>{
 
                   res.send({
                     'status':'Login Successfully',
-                    'route':'http://localhost:3000/admin/profile',
+                    'route':`${frontUrl}/admin/profile`,
                     'profile':{
                       first_name:userData.first_name,
                       last_name:userData.last_name,
@@ -79,7 +82,7 @@ const verifyLogin = async(req, res)=>{
       else{
           res.send({
             'status':'username does not exists',
-            'route':'http://localhost:3000/adminlogin'
+            'route':`${frontUrl}/adminlogin`
           });
 
       }
